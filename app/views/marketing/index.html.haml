@@ -1,23 +1,29 @@
 .container
   .row
-    .col-xs-8
-      %h1.text-center dRUNk
+    .col-sm-6.col-sm-offset-3
+      %h1.text-center Guardian
 
-      %h3.text-center Find yourself needing to limit how much you Drink/Play Starcraft/Eat ice cream?
+      %h3.text-center A tool to help you overcome your vices.
 
-      %h4.text-center Use dRUNk to help you balance it out
+      %h4.text-center Use Guardian to help you balance it out
 
       =form_tag(users_path, method: "POST") do
 
-        %p.text-center I'm
+        %p.text-center Hey! my name is
 
         .form-group
           %input.form-control{placeholder: 'Ben', name: "user[name]"}
-        %p.text-center and i want to balance my vice of
+
+        %p.text-center and i want to hold myself accountable my vice of
+
         .form-group
           %input.form-control{placeholder: 'Drinking', name: "user[vice]"}
+
         %p.text-center my guardians can reach me at
+
         .form-group
           %input.form-control{placeholder: '555-555-5555', name: "user[phone_number]"}
+
         %br
+
         %input.btn.btn-primary{type:'submit', value:'Sign Up'}

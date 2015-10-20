@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  VICE_THRESHOLD = -3
-  VIRTUE_THRESHOLD = +3
+  VICE_THRESHOLD = -2
+  VIRTUE_THRESHOLD = +2
 
   has_one :champion
   has_many :karma_events

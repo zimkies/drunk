@@ -1,18 +1,34 @@
 .container
   .row
     .col-sm-6.col-sm-offset-3
-
       -if @user.championed?
-        %h4.text-center.karma-points
-          Net Karma: #{"%+d" % @user.karma}
+
+        %br
+
+        %span.help-link.pull-right
+          %a{href: help_path}
+            ?
+
+        %h4.text-center
+          Net Karma:
+          %br
+          .karma-points #{"%+d" % @user.karma}
+
+        %br
+        %br
 
         %h3.text-center
           -if @user.bad?
             No #{@user.vice} for you, you are above your limit!
           -elsif @user.ok?
-            Your life is in balance! Nice work! :D
+            Your life is currently sufficiently in balance!
+            %br
+            Nice work! :D
           -else
-            Great Job! You are way over your virtue quota. Why not spend some time #{@user.vice} today?
+            Great Job! You are way over your virtue quota. I'd say you've earned some #{@user.vice} time today.
+
+        %br
+        %br
 
         .row
           .col-xs-6.karma-column.vice-column.text-center
@@ -24,7 +40,10 @@
 
               %input{type: 'hidden', value: "-1", name: "karma_event[points]"}
 
-              %input.add-karma.add-vice{type: "submit", value: "+"}
+              - skip_vice_tutorial = @user.negative_karma < 0
+              - data = skip_vice_tutorial ? {} : { confirm: "Clicking this button records that you just committed one of your vices. You'll need to do something good to counter it!"}
+
+              %input.add-karma.add-vice{type: "submit", value: "+", data: data}
 
           .col-xs-6.karma-column.virtue-column.text-center
             =image_tag('angel.png', class: 'advisor-icon')
@@ -35,7 +54,11 @@
 
               %input{type: 'hidden', value: "+1", name: "karma_event[points]"}
 
-              %input.add-karma.add-virtue{type: "submit", value: "+"}
+              - skip_virtue_tutorial = @user.positive_karma > 0
+              - data = skip_virtue_tutorial ? {} : { confirm: "Clicking this button records that you completed a good act to counter one of your vices. Click cancel to undo this"}
+
+              %input.add-karma.add-virtue{type: "submit", value: "+", data: data}
+
 
       -else
 
@@ -47,10 +70,13 @@
           %input{hidden: true, value: @user.id, name: "champion[user_id]"}
 
           .form-group
-            %input.form-control{placeholder: 'Abu', name: "champion[name]"}
+            %input.form-control{placeholder: 'Maximux Decimus Meridius', name: "champion[name]"}
 
           %p.text-center wants to help you out and be contacted at
           .form-group
             %input.form-control{placeholder: '555-555-5555', name: "champion[phone_number]"}
+
+          %p.text-center.alert-warning (We will contact your guardian if you step too far over your vice boundaries)
           %br
           %input.btn.btn-primary{type:'submit', value:'Register Champion'}
+
