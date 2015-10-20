@@ -1,23 +1,35 @@
 .container
   .row
-    .col-xs-12
+    .col-sm-6.col-sm-offset-3
 
       -if @user.championed?
+        %h4.text-center.karma-points
+          #{"%+d" % @user.karma}
+
         %h3.text-center
-          -if @user.above_vice_threshold?
-            "No #{@user.vice} for you, you are above your limit!"
-          -elsif @user.above_virtue_threshold?
+          -if @user.bad?
+            No #{@user.vice} for you, you are above your limit!
+          -elsif @user.ok?
             Your life is in balance! Nice work! :D
           -else
-            Great Job! You are way over your virtue quota. Why not spend some time #{user.vice} today?
+            Great Job! You are way over your virtue quota. Why not spend some time #{@user.vice} today?
 
         .row
-          .col-xs-6.karma-column.vice-column
-            Vice Count: #{@user.negative_karma}
-            %button.add-vice +
-          .col-xs-6.karma-column.virtue-column
+          .col-xs-6.karma-column.vice-column.text-center
+            Vice Count: #{-@user.negative_karma}
+            =form_tag(user_karma_events_path(@user), method: "POST") do
+
+              %input{type: 'hidden', value: "-1", name: "karma_event[points]"}
+
+              %input.add-karma.add-vice{type: "submit", value: "+"}
+
+          .col-xs-6.karma-column.virtue-column.text-center
             Virtue Count: #{@user.positive_karma}
-            %button.add-virtue +
+            =form_tag(user_karma_events_path(@user), method: "POST") do
+
+              %input{type: 'hidden', value: "+1", name: "karma_event[points]"}
+
+              %input.add-karma.add-virtue{type: "submit", value: "+"}
 
       -else
 

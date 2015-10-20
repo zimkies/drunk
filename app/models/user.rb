@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  VICE_THRESHOLD = 3
-  VIRTUE_THRESHOLD = -3
+  VICE_THRESHOLD = -3
+  VIRTUE_THRESHOLD = +3
 
   has_one :champion
   has_many :karma_events
@@ -15,18 +15,22 @@ class User < ActiveRecord::Base
   end
 
   def negative_karma
-    karma_events.negative.sum(:points)
+    karma_events.negative.sum(:points) || 0
   end
 
   def positive_karma
-    karma_events.positive.sum(:points)
+    karma_events.positive.sum(:points) || 0
   end
 
-  def above_virtue_threshold?
+  def good?
     karma > VIRTUE_THRESHOLD
   end
 
-  def above_vice_threshold?
-    karma > VICE_THRESHOLD
+  def ok?
+    !(good? || bad?)
+  end
+
+  def bad?
+    karma < VICE_THRESHOLD
   end
 end
