@@ -4,7 +4,7 @@
 
       -if @user.championed?
         %h4.text-center.karma-points
-          #{"%+d" % @user.karma}
+          Net Karma: #{"%+d" % @user.karma}
 
         %h3.text-center
           -if @user.bad?
@@ -16,7 +16,10 @@
 
         .row
           .col-xs-6.karma-column.vice-column.text-center
-            Vice Count: #{-@user.negative_karma}
+            =image_tag("devil.png", class: 'advisor-icon')
+            Vice Count:
+            %span.vice-count
+              #{-@user.negative_karma}
             =form_tag(user_karma_events_path(@user), method: "POST") do
 
               %input{type: 'hidden', value: "-1", name: "karma_event[points]"}
@@ -24,7 +27,10 @@
               %input.add-karma.add-vice{type: "submit", value: "+"}
 
           .col-xs-6.karma-column.virtue-column.text-center
-            Virtue Count: #{@user.positive_karma}
+            =image_tag('angel.png', class: 'advisor-icon')
+            Virtue Count:
+            %span.virtue-count
+              #{@user.positive_karma}
             =form_tag(user_karma_events_path(@user), method: "POST") do
 
               %input{type: 'hidden', value: "+1", name: "karma_event[points]"}

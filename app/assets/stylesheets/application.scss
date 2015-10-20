@@ -2,16 +2,50 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+$blue: #1589B1;
+$red: maroon;
+
 body.users {
+  .advisor-icon {
+    height: 50px;
+  }
+
+  .vice-count {
+    color: $red;
+  }
+
+  .virtue-count {
+    color: $blue;
+  }
+
   .karma-column {
     height: 150px;
 
+    .add-karma {
+      border-radius: 50%;
+      border: 1px $red solid;
+      color: $red;
+      background-color: lighten(gray, 40%);
+      height: 30px;
+      width: 30px;
+      text-align: center;
+
+      &.add-virtue {
+        border: 1px $blue solid;
+        color: $blue;
+      }
+
+      &.add-vice {
+        border: 1px $red solid;
+        color: $red;
+      }
+    }
     .vice-bar {
-      background-color: maroon;
+      color: $red;
     }
 
     .virtue-bar {
-      background-color: green;
+      color: $blue;
     }
   }
 }
