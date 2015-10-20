@@ -1,0 +1,17 @@
+ // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+body.users {
+  .karma-column {
+    height: 150px;
+
+    .vice-bar {
+      background-color: maroon;
+    }
+
+    .virtue-bar {
+      background-color: green;
+    }
+  }
+}

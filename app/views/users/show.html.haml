@@ -1,0 +1,38 @@
+.container
+  .row
+    .col-xs-12
+
+      -if @user.championed?
+        %h3.text-center
+          -if @user.above_vice_threshold?
+            "No #{@user.vice} for you, you are above your limit!"
+          -elsif @user.above_virtue_threshold?
+            Your life is in balance! Nice work! :D
+          -else
+            Great Job! You are way over your virtue quota. Why not spend some time #{user.vice} today?
+
+        .row
+          .col-xs-6.karma-column.vice-column
+            Vice Count: #{@user.negative_karma}
+            %button.add-vice +
+          .col-xs-6.karma-column.virtue-column
+            Virtue Count: #{@user.positive_karma}
+            %button.add-virtue +
+
+      -else
+
+        %h3.text-center Finding balance in your life can be hard
+
+        =form_tag(champions_path, method: "POST") do
+          %p.text-center Fortunately your friend and champion
+
+          %input{hidden: true, value: @user.id, name: "champion[user_id]"}
+
+          .form-group
+            %input.form-control{placeholder: 'Abu', name: "champion[name]"}
+
+          %p.text-center wants to help you out and be contacted at
+          .form-group
+            %input.form-control{placeholder: '555-555-5555', name: "champion[phone_number]"}
+          %br
+          %input.btn.btn-primary{type:'submit', value:'Register Champion'}
