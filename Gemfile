@@ -12,6 +12,7 @@ gem 'bootstrap-sass'
 gem 'turbolinks'
 gem 'react-rails'
 gem 'phone'
+gem 'rails_12factor'
 
 gem 'haml'
 gem 'twilio-ruby'
