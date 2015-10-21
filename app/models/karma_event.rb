@@ -5,6 +5,10 @@ class KarmaEvent < ActiveRecord::Base
   scope :positive, -> { where(positive: true) }
   scope :negative, -> { where(positive: false) }
 
+  def negative?
+    !positive?
+  end
+
   def points=(points)
     self.positive = points >= 0
     super

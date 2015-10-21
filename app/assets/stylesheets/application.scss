@@ -8,6 +8,11 @@ $green: green;
 $white: white;
 $black: black;
 
+body{
+  background-image: url(background_texture_lighter.jpeg);
+  background-repeat:repeat;
+}
+
 body.users {
   .help-link {
     position: absolute;
@@ -59,7 +64,7 @@ body.users {
       border-radius: 50%;
       border: 1px $red solid;
       color: $red;
-      background-color: lighten(gray, 40%);
+      background-color: transparent;
       height: 50px;
       width: 50px;
       text-align: center;
