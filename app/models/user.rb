@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_one :champion
   has_many :karma_events
   validates :vice, :name, :phone_number, presence: :true
+  validates_uniqueness_of :phone_number
 
   def phone_number=(phone_number)
     write_attribute(:phone_number, PhoneNumber.new(phone_number).to_s)
