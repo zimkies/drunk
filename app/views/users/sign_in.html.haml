@@ -1,0 +1,19 @@
+.container
+  .row
+    .col-sm-6.col-sm-offset-3
+
+      %br
+      %br
+
+      %h3 Forgot your Guardian Page?
+
+      %br
+
+      %h4 Input your phone number and we'll text it to you
+
+      %br
+
+      = form_tag send_home_page_path, method: "POST", class: "form-inline" do
+        .form-group
+          %input.form-control{name: "phone_number", placeholder: "555-555-5555" }
+        %input.btn.btn-primary{type: "submit", value: "Text it to me" }

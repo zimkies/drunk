@@ -3,6 +3,25 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def sign_in
+  end
+
+  def send_home_page
+    phone_number = PhoneNumber.new(params[:phone_number]).to_s
+    if phone_number.present? && (user = User.find_by_phone_number(phone_number)).present?
+      client.messages.create(
+        from: ENV.fetch('TWILIO_CX_NUMBER'),
+        to: phone_number,
+        body: "Hey there #{user.name}. Here's your guardian page: #{user_url(user)}"
+      )
+
+      flash[:success] = "Great! We texted it to you"
+    else
+      flash[:warning] = "'#{params[:phone_number]}' is not a a registered phone number in our system. Are you sure you signed up? "
+    end
+    redirect_to :back
+  end
+
   def create
     user = User.new(user_params)
     if user.save

@@ -3,9 +3,14 @@
     .col-sm-6.col-sm-offset-3
       %h1.text-center Guardian
 
+      %br
       %h3.text-center A tool to help you overcome your vices.
+      %br
 
       %h4.text-center Use Guardian to help you balance it out
+
+      %br
+      %br
 
       =form_tag(users_path, method: "POST") do
 
@@ -25,5 +30,11 @@
           %input.form-control{placeholder: '555-555-5555', name: "user[phone_number]"}
 
         %br
+        %br
+
+        .sign_in.pull-right
+          or
+          %a.btn.btn-link{href: sign_in_path} Sign in
+          with an existing account
 
         %input.btn.btn-primary{type:'submit', value:'Begin'}
