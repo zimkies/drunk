@@ -24,5 +24,7 @@ module Drunk
     config.active_record.raise_in_transactional_callbacks = true
 
     config.autoload_paths << Rails.root.join('lib')
+
+    default_url_options[:host] =  "https://guardians.herokuapp.com"
   end
 end

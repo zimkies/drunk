@@ -5,10 +5,6 @@
 
         %br
 
-        %span.help-link.pull-right
-          %a{href: help_path}
-            ?
-
         %h4.text-center
           Hey #{@user.name}! Your Net Karma is:
           %br
@@ -36,7 +32,7 @@
               %br
               And then record it here to restore balance
             -elsif @user.ok?
-              You are currently keeping your vice in check!
+              You haven't yet your vice get out of hand yet!
               %br
               %br
               Nice work! :D
