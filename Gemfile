@@ -13,6 +13,7 @@ gem 'turbolinks'
 gem 'react-rails'
 gem 'phone'
 gem 'rails_12factor'
+gem 'unicorn' # Unicorn as a webserver
 
 gem 'haml'
 gem 'twilio-ruby'
