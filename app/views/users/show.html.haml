@@ -17,15 +17,32 @@
         %br
         %br
 
-        %h3.text-center
-          -if @user.bad?
-            No #{@user.vice} for you, you are above your limit!
-          -elsif @user.ok?
-            Your life is currently sufficiently in balance!
+        -if @user.karma_events.count == 0
+          %h3.text-center
+            To get started, tap on the red circle every time you succumb to #{@user.vice}
             %br
-            Nice work! :D
-          -else
-            Great Job! You are way over your virtue quota. I'd say you've earned some #{@user.vice} time today.
+            %br
+            and the blue circle every time you do something
+            %a{href: help_path(anchor: 'virtues')} to negate it!
+        -else
+
+          %h3.text-center
+            -if @user.bad?
+              No more #{@user.vice} for you, you are above your limit!
+              %br
+              %br
+              Do something good today to balance out your karma.
+
+              %br
+              %br
+              And then record it here to restore balance
+            -elsif @user.ok?
+              You are currently keeping your vice in check!
+              %br
+              %br
+              Nice work! :D
+            -else
+              Great Job! You are way over your virtue quota. I'd say you've earned some #{@user.vice} time today.
 
         %br
         %br
@@ -41,7 +58,7 @@
               %input{type: 'hidden', value: "-1", name: "karma_event[points]"}
 
               - skip_vice_tutorial = @user.negative_karma < 0
-              - data = skip_vice_tutorial ? {} : { confirm: "Clicking this button records that you just committed one of your vices. You'll need to do something good to counter it!"}
+              - data = skip_vice_tutorial ? {} : { confirm: "Clicking this button records that you just succumbed to one of your vices. You'll need to do something good to counter it!"}
 
               %input.add-karma.add-vice{type: "submit", value: "+", data: data}
 
@@ -59,24 +76,31 @@
 
               %input.add-karma.add-virtue{type: "submit", value: "+", data: data}
 
+          %p ()
 
       -else
 
         %h3.text-center Finding balance in your life can be hard
 
+        %br
+
+        %h4.text-center And trying to cut down on #{@user.vice} without support is so much harder.
+
+        %br
+
         =form_tag(champions_path, method: "POST") do
-          %p.text-center Fortunately your friend and champion
+          %p.text-center Fortunately you have a friend and guardian
 
           %input{hidden: true, value: @user.id, name: "champion[user_id]"}
 
           .form-group
             %input.form-control{placeholder: 'Maximux Decimus Meridius', name: "champion[name]"}
 
-          %p.text-center wants to help you out and be contacted at
+          %p.text-center who wants to help you out and can be contacted at
           .form-group
             %input.form-control{placeholder: '555-555-5555', name: "champion[phone_number]"}
 
-          %p.text-center.alert-warning (We will contact your guardian if you step too far over your vice boundaries)
+          %p.text-center.alert-warning (We will contact your guardian to intervene if you step too far over your vice boundaries)
           %br
-          %input.btn.btn-primary{type:'submit', value:'Register Champion'}
+          %input.btn.btn-primary{type:'submit', value:'Nominate Guardian'}
 

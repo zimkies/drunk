@@ -16,6 +16,8 @@
 !/log/.keep
 /tmp
 
+# Local settings
+Procfile.mine
 
 # Vendor
 /vendor

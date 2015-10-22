@@ -28,7 +28,15 @@ class ChampionsController < ApplicationController
     client.messages.create(
       from: ENV.fetch('TWILIO_CX_NUMBER'),
       to: champion.phone_number,
-      body: "We'll let you know if they stray over the limits we've set in #{champion.user.vice}, and it will be your job to make sure they don't do any more until they've balanced it with a good act."
+      body: "We'll let you know if they stray over the limits we've set for #{champion.user.vice}, and it will be your job to make sure they don't do any more until they've balanced it with a good act."
+    )
+
+    sleep(0.5)
+
+    client.messages.create(
+      from: ENV.fetch('TWILIO_CX_NUMBER'),
+      to: champion.phone_number,
+      body: "Are you willing to take on this responsibility?"
     )
   end
 

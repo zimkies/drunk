@@ -14,27 +14,30 @@
 
       =form_tag(users_path, method: "POST") do
 
-        %p.text-center Hey! my name is
+        %p.text-center Hey! your name is
 
         .form-group
           %input.form-control{placeholder: 'Ben', name: "user[name]"}
 
-        %p.text-center and i want to hold myself accountable for my vice
+        %p.text-center and you want to hold yourself accountable for your vice
 
         .form-group
           %input.form-control{placeholder: 'Drinking', name: "user[vice]"}
 
-        %p.text-center my guardian can reach me at
+        %p.text-center we can reach you at
 
         .form-group
           %input.form-control{placeholder: '555-555-5555', name: "user[phone_number]"}
+
+        %p.alert-warning.alert.text-center
+          (We use this to reach out to you if you let your vice get out of check)
 
         %br
         %br
 
         .sign_in.pull-right
-          or
-          %a.btn.btn-link{href: sign_in_path} Sign in
-          with an existing account
+          %span<>or
+          %a.btn.btn-link{href: sign_in_path}<>Sign in
+          %span><with an existing account
 
-        %input.btn.btn-primary{type:'submit', value:'Begin'}
+        %input.btn.btn-primary.btn-lg{type:'submit', value:'Begin'}
