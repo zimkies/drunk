@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   VICE_THRESHOLD = -2
   VIRTUE_THRESHOLD = +2
 
-  has_one :champion
-  has_many :karma_events
+  has_one :champion, dependent: :destroy
+  has_many :karma_events, dependent: :destroy
   validates :vice, :name, :phone_number, presence: :true
   validates_uniqueness_of :phone_number
 

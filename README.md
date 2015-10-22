@@ -14,3 +14,6 @@ An app that forces you to do something good for yourself everytime you have a dr
 ## Marketing
 [] Send out to friends
 [] Build feedback form and link in code
+
+## Bugs
+[] Feedback from Challen
