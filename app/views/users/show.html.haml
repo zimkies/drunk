@@ -15,7 +15,6 @@
           .karma-points #{"%+d" % @user.karma}
 
         %br
-        %br
 
         -if @user.karma_events.count == 0
           %h3.text-center
@@ -75,8 +74,6 @@
               - data = skip_virtue_tutorial ? {} : { confirm: "Clicking this button records that you completed a good act to counter one of your vices. Click cancel to undo this"}
 
               %input.add-karma.add-virtue{type: "submit", value: "+", data: data}
-
-          %p ()
 
       -else
 
